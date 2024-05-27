@@ -4,6 +4,8 @@ import { checkOTP } from 'services/auth.js';
 import { setCookie } from 'utils/cookies.js';
 import { getProfile } from '../../services/user.js';
 
+import styles from "./CheckOTPForm.module.css"
+
 function CheckOTPForm({ code, setCode, setStep, mobile }) {
 	const navigate = useNavigate();
 

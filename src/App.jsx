@@ -1,5 +1,11 @@
+import { BrowserRouter, Route, Router, Routes } from 'react-router-dom';
+
 function App() {
-  return <h1>پروژه دیوار</h1>;
+	return (
+		<BrowserRouter>
+			<Router />
+		</BrowserRouter>
+	);
 }
 
 export default App;

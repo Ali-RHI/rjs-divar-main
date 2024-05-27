@@ -1,4 +1,4 @@
-import { Route, Routes } from 'react-router-dom';
+import { Navigate, Route, Routes } from 'react-router-dom';
 import HomePage from 'pages/HomePage.jsx';
 import DashboardPage from 'pages/DashboardPage.jsx';
 import AuthPage from 'pages/AuthPage.jsx';
@@ -6,6 +6,7 @@ import AdminPage from 'pages/AdminPage.jsx';
 import PageNotFound from 'pages/PageNotFound.jsx';
 import { useQuery } from '@tanstack/react-query';
 import { getProfile } from 'services/user.js';
+import Loader from '../components/module/Loader.jsx';
 
 function Router() {
 	const { data, isLoading } = useQuery({
@@ -13,7 +14,7 @@ function Router() {
 		queryFn: getProfile,
 	});
 
-	if (isLoading) return <h1>Loading</h1>;
+	if (isLoading) return <Loader />;
 
 	return (
 		<Routes>
@@ -23,15 +24,21 @@ function Router() {
 			/>
 			<Route
 				path="/dashboard"
-				element={<DashboardPage />}
+				element={data ? <DashboardPage /> : <Navigate to="/auth" />}
 			/>
 			<Route
 				path="/auth"
-				element={<AuthPage />}
+				element={!data ? <AuthPage /> : <Navigate to="/dashboard" />}
 			/>
 			<Route
 				path="/admin"
-				element={<AdminPage />}
+				element={
+					data && data.data.role === 'ADMIN' ? (
+						<AdminPage />
+					) : (
+						<Navigate to="/" />
+					)
+				}
 			/>
 			<Route
 				path="/*"

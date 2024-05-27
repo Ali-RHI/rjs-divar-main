@@ -24,11 +24,12 @@ api.interceptors.request.use(
 
 api.interceptors.response.use(
 	(res) => {
-		return response;
+		return res;
 	},
 	async (error) => {
 		const originalRequest = error.config;
-		if (error.response.status === 410 && !originalRequest._retry) {
+		if (error.response.status === 401 && !originalRequest._retry) {
+			console.log('false false false');
 			originalRequest._retry = true;
 			const res = await getNewTokens();
 			if (!res?.response) return;

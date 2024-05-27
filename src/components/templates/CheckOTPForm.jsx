@@ -1,13 +1,16 @@
+import { useNavigate } from 'react-router-dom';
 import { checkOTP } from 'services/auth.js';
 import { setCookie } from 'utils/cookies.js';
 
 function CheckOTPForm({ code, setCode, setStep, mobile }) {
+	const navigate = useNavigate();
 	const submitHandler = async (e) => {
 		e.preventDefault();
 		if (code.length !== 5) return;
 		const { response, error } = await checkOTP(mobile, code);
 		if (response) {
 			setCookie(response.data);
+			navigate("/")
 		}
 		if (error) {
 			console.log(error.response.data.message);

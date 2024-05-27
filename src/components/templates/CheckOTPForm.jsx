@@ -1,9 +1,17 @@
+import { useQuery } from '@tanstack/react-query';
 import { useNavigate } from 'react-router-dom';
 import { checkOTP } from 'services/auth.js';
 import { setCookie } from 'utils/cookies.js';
+import { getProfile } from '../../services/user.js';
 
 function CheckOTPForm({ code, setCode, setStep, mobile }) {
 	const navigate = useNavigate();
+
+	const { refetch } = useQuery({
+		queryKey: ['profile'],
+		queryFn: getProfile,
+	});
+
 	const submitHandler = async (e) => {
 		e.preventDefault();
 		if (code.length !== 5) return;
@@ -11,6 +19,7 @@ function CheckOTPForm({ code, setCode, setStep, mobile }) {
 		if (response) {
 			setCookie(response.data);
 			navigate("/")
+			refetch()
 		}
 		if (error) {
 			console.log(error.response.data.message);

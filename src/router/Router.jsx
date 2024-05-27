@@ -8,12 +8,12 @@ import { useQuery } from '@tanstack/react-query';
 import { getProfile } from 'services/user.js';
 
 function Router() {
-	// const { data, isLoading } = useQuery({
-	// 	queryKey: ['profile'],
-	// 	queryFn: getProfile,
-	// });
+	const { data, isLoading } = useQuery({
+		queryKey: ['profile'],
+		queryFn: getProfile,
+	});
 
-	// if(isLoading)return <h1>Loading</h1>
+	if (isLoading) return <h1>Loading</h1>;
 
 	return (
 		<Routes>

@@ -1,3 +1,9 @@
+import { Route, Routes } from "react-router-dom"
+import HomePage from "pages/HomePage.jsx"
+import DashboardPage from "pages/DashboardPage.jsx"
+import AuthPage from "pages/AuthPage.jsx"
+import AdminPage from "pages/AdminPage.jsx"
+import PageNotFound from "pages/PageNotFound.jsx"
 
 
 function Router() {

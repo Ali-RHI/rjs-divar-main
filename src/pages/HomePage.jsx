@@ -3,6 +3,7 @@ import Main from 'components/templates/Main.jsx';
 import Sidebar from 'components/templates/Sidebar.jsx';
 import { getAllPosts } from 'services/user.js';
 import Loader from 'components/module/Loader.jsx';
+import { getCategory } from '../services/admin.js';
 
 const style = { display: 'flex' };
 
@@ -17,7 +18,7 @@ function HomePage() {
 	});
 	return (
 		<>
-			{isLoading || categoryLoading ? (
+			{postLoading || categoryLoading ? (
 				<Loader />
 			) : (
 				<div style={style}>

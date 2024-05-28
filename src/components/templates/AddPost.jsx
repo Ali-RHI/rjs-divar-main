@@ -2,6 +2,8 @@ import { useQuery } from '@tanstack/react-query';
 import { getCategory } from '../../services/admin.js';
 import { useState } from 'react';
 
+import styles from './AddPost.module.css'
+
 function AddPost() {
 	const [form, setForm] = useState({
         title:'',
@@ -28,7 +30,7 @@ function AddPost() {
 		console.log(form);
 	};
 	return (
-		<form onChange={changeHandler}>
+		<form onChange={changeHandler} className={styles.form}>
 			<h3>افزودن آگهی</h3>
 
 			<label htmlFor="title">عنوان</label>

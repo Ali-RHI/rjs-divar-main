@@ -1,18 +1,34 @@
 import { useQuery } from '@tanstack/react-query';
 import { getCategory } from '../../services/admin.js';
+import { useState } from 'react';
 
 function AddPost() {
+	const [form, setForm] = useState({
+        title:'',
+        content:'',catagory:"",city:'',price:null,images:null
+    });
+
 	const { data } = useQuery({
 		queryFn: getCategory,
 		queryKey: ['get-categories'],
 	});
 
+	const changeHandler = (event) => {
+        const name=event.target.name
+        if(name!=="images"){
+            setForm({...form,[name]:event.target.value})
+        }else{
+            setForm({...form,[name]:event.target.files[0]})
+
+        }
+    };
+
 	const addHandler = (event) => {
 		event.preventDefault();
-        console.log("sent")
+		console.log(form);
 	};
 	return (
-		<form>
+		<form onChange={changeHandler}>
 			<h3>افزودن آگهی</h3>
 
 			<label htmlFor="title">عنوان</label>

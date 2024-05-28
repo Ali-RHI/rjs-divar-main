@@ -2,13 +2,19 @@ import { useQuery } from '@tanstack/react-query';
 import { getCategory } from '../../services/admin.js';
 import { useState } from 'react';
 
-import styles from './AddPost.module.css'
+import styles from './AddPost.module.css';
+import { getCookie } from '../../utils/cookies.js';
+import axios from 'axios';
 
 function AddPost() {
 	const [form, setForm] = useState({
-        title:'',
-        content:'',catagory:"",city:'',price:null,images:null
-    });
+		title: '',
+		content: '',
+		catagory: '',
+		city: '',
+		price: null,
+		images: null,
+	});
 
 	const { data } = useQuery({
 		queryFn: getCategory,
@@ -16,21 +22,37 @@ function AddPost() {
 	});
 
 	const changeHandler = (event) => {
-        const name=event.target.name
-        if(name!=="images"){
-            setForm({...form,[name]:event.target.value})
-        }else{
-            setForm({...form,[name]:event.target.files[0]})
-
-        }
-    };
+		const name = event.target.name;
+		if (name !== 'images') {
+			setForm({ ...form, [name]: event.target.value });
+		} else {
+			setForm({ ...form, [name]: event.target.files[0] });
+		}
+	};
 
 	const addHandler = (event) => {
 		event.preventDefault();
+		const formData = new FormData();
+		for (let i in form) {
+			formData.append(i, form[i]);
+		}
+
+		const token = getCookie('accessToken');
+		axios
+			.post(`${import.meta.env.VITE_BASE_URL}post/create`, formData, {
+				headers: {
+					'Content-Type': 'multipart/form-data',
+					Authorization: `bearer ${token}`,
+				},
+			})
+			.then((res) => console.log(res))
+			.catch((error) => console.log(error));
 		console.log(form);
 	};
 	return (
-		<form onChange={changeHandler} className={styles.form}>
+		<form
+			onChange={changeHandler}
+			className={styles.form}>
 			<h3>افزودن آگهی</h3>
 
 			<label htmlFor="title">عنوان</label>
@@ -48,7 +70,7 @@ function AddPost() {
 
 			<label htmlFor="price">قیمت</label>
 			<input
-				type="text"
+				type="number"
 				name="price"
 				id="price"
 			/>

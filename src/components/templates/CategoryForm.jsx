@@ -17,7 +17,6 @@ function CategoryForm() {
 			queryClient.invalidateQueries('get-categories');
 		},
 	});
-	console.log({ isLoading, error, data });
 
 	const submitHandler = (event) => {
 		event.preventDefault();

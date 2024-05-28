@@ -8,7 +8,7 @@ function CategoryList() {
 		queryFn: getCategory,
 		queryKey: ['get-categories'],
 	});
-	console.log({ data, isLoading });
+
 	return (
 		<div className={styles.list}>
 			{isLoading ? (

@@ -3,15 +3,18 @@ import { BrowserRouter } from 'react-router-dom';
 import Router from 'router/Router.jsx';
 import defaultOptions from 'configs/reactQuery.js';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
+import Layout from 'layout/Layout.jsx';
 
 function App() {
 	const queryClient = new QueryClient({ defaultOptions });
 	return (
 		<QueryClientProvider client={queryClient}>
 			<BrowserRouter>
-				<Router />
+				<Layout>
+					<Router />
+				</Layout>
 			</BrowserRouter>
-			<ReactQueryDevtools/>
+			<ReactQueryDevtools />
 		</QueryClientProvider>
 	);
 }

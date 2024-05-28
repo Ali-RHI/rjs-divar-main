@@ -13,7 +13,7 @@ function AddPost() {
 		content: '',
 		catagory: '',
 		city: '',
-		price: null,
+		amount: null,
 		images: null,
 	});
 
@@ -69,11 +69,11 @@ function AddPost() {
 				id="content"
 			/>
 
-			<label htmlFor="price">قیمت</label>
+			<label htmlFor="amount">قیمت</label>
 			<input
 				type="number"
-				name="price"
-				id="price"
+				name="amount"
+				id="amount"
 			/>
 
 			<label htmlFor="city">شهر</label>

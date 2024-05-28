@@ -1,10 +1,11 @@
 import { useState } from 'react';
 
 import styles from './CategoryForm.module.css';
-import { useMutation } from '@tanstack/react-query';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { addCategory } from 'services/admin.js';
 
 function CategoryForm() {
+	const queryClient = useQueryClient();
 	const [form, setform] = useState({ name: '', slug: '', icon: '' });
 	const changeHandler = (event) => {
 		setform({ ...form, [event.target.name]: event.target.value });
@@ -12,6 +13,9 @@ function CategoryForm() {
 
 	const { mutate, isLoading, error, data } = useMutation({
 		mutationFn: addCategory,
+		onSuccess: () => {
+			queryClient.invalidateQueries('get-categories');
+		},
 	});
 	console.log({ isLoading, error, data });
 
@@ -29,7 +33,7 @@ function CategoryForm() {
 			onSubmit={submitHandler}
 			className={styles.form}>
 			<h3>دسته بندی جدید</h3>
-			{!!error&&<p>مشکلی پیش آمده است!</p>}
+			{!!error && <p>مشکلی پیش آمده است!</p>}
 			{data?.status === 201 && <p>دسته بندی با موفقیت اضافه شد</p>}
 			<label htmlFor="name">اسم دسته بندی</label>
 			<input
@@ -49,7 +53,11 @@ function CategoryForm() {
 				name="icon"
 				id="icon"
 			/>
-			<button type="submit" disabled={isLoading}>ایجاد</button>
+			<button
+				type="submit"
+				disabled={isLoading}>
+				ایجاد
+			</button>
 		</form>
 	);
 }

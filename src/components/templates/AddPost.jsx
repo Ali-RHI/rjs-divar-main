@@ -5,6 +5,7 @@ import { useState } from 'react';
 import styles from './AddPost.module.css';
 import { getCookie } from '../../utils/cookies.js';
 import axios from 'axios';
+import toast, { Toaster } from 'react-hot-toast';
 
 function AddPost() {
 	const [form, setForm] = useState({
@@ -45,8 +46,8 @@ function AddPost() {
 					Authorization: `bearer ${token}`,
 				},
 			})
-			.then((res) => console.log(res))
-			.catch((error) => console.log(error));
+			.then((res) => toast.success(res.data.message))
+			.catch((error) => toast.error("مشکلی پیش آمده است!"));
 		console.log(form);
 	};
 	return (
@@ -101,6 +102,7 @@ function AddPost() {
 				name="images"
 			/>
 			<button onClick={addHandler}>ایجاد آگهی</button>
+			<Toaster />
 		</form>
 	);
 }

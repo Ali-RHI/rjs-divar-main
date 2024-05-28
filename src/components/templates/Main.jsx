@@ -1,12 +1,14 @@
 import { sp } from '../../utils/replaceNumber.js';
 
+import styles from './Main.module.css'
+
 function Main({ posts }) {
 	console.log(posts);
 	return (
-		<div>
+		<div className={styles.container}>
 			{posts.data.posts.map((post) => (
-				<div key={post._id}>
-					<div>
+				<div key={post._id} className={styles.card}>
+					<div className={styles.info}>
 						<p>{post.options?.title}</p>
 						<div>
 							<p>{sp(post.amount)} تومان</p>

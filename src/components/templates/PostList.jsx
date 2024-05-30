@@ -9,6 +9,9 @@ function PostList() {
 		queryKey: ['my-post-list'],
 		queryFn: getPosts,
 	});
+
+const deleteHandler=(e)=>{}
+
 	return (
 		<div className={styles.list}>
 			{isLoading ? (
@@ -27,6 +30,9 @@ function PostList() {
 							<div>
 								<p>{post.options.title}</p>
 								<span>{post.options.content}</span>
+							</div>
+							<div className={styles.delete}>
+								<button onClick={deleteHandler}>حذف آگهی</button>
 							</div>
 							<div className={styles.price}>
 								<p>

@@ -21,6 +21,7 @@
 	align-items: center;
 	color: grey;
 	height: 50px;
+	margin-right:20px ;
 }
 
 .header span p {
@@ -39,4 +40,8 @@
 	align-self: center;
 
 	margin-right: 40px;
+}
+#manager{
+	width: 20px;
+	height: 20px;
 }

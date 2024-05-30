@@ -5,7 +5,7 @@ import styles from './Main.module.css';
 function Main({ posts }) {
 	return (
 		<div className={styles.container}>
-			{posts.map((post) => (
+			{posts?.map((post) => (
 				<div
 					key={post._id}
 					className={styles.card}>

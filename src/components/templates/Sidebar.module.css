@@ -5,11 +5,18 @@
 
 .sidebar li{
     display: flex;
-    margin: 20px 0;
+border-radius: 4px;
+    margin: 5px 0;
+    padding:10px 5px;
+    cursor: pointer;
 } 
 
 .sidebar li p{
     font-weight: 200;
     margin-right: 10px;
     color: grey;
+}
+.selected{
+    background: rgba(166, 38, 38,0.2);
+    color: #fff;
 }

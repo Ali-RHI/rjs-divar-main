@@ -38,6 +38,9 @@
 
 .delete {
 	flex-shrink: 2;
+	justify-content: left;
+	margin-left: 50px;
+	display: flex;
 }
 
 .delete button {
